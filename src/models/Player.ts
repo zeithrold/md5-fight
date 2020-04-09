@@ -1,10 +1,11 @@
 /* eslint prefer-destructuring: "off" */
 
-import md5 from "blueimp-md5";
+import md5 from 'blueimp-md5';
 // import { Skill } from '.'
-import { Skill, utils } from "./skills";
-import { BuffSlot } from "./buffs";
-import { AngrySkill, FortunateSkill, DodgeSkill } from "./skills";
+import {
+  Skill, utils, AngrySkill, FortunateSkill, DodgeSkill,
+} from './skills';
+import { BuffSlot } from './buffs';
 
 export interface PlayerProp {
   value: number;
@@ -78,19 +79,19 @@ export default class Player {
 
   buffProps = {
     freezed: false,
-    attackable: true
+    attackable: true,
   };
 
   skillProps = {
     // freezed: false,
-    anger: 0
+    anger: 0,
   };
 
   buffs: BuffSlot[] = [];
 
   readonly maxHealth: number;
 
-  type: "physical" | "magical";
+  type: 'physical' | 'magical';
 
   /**
    * The constructor of the class `Player`.
@@ -115,7 +116,7 @@ export default class Player {
     this.fortunate = { value: slicedPlayerProp[3], default: slicedPlayerProp[3] };
     this.physicalDefence = { value: slicedPlayerProp[4], default: slicedPlayerProp[4] };
     this.magicalDefence = { value: slicedPlayerProp[5], default: slicedPlayerProp[5] };
-    this.type = slicedPlayerProp[6] % 2 === 0 ? "physical" : "magical";
+    this.type = slicedPlayerProp[6] % 2 === 0 ? 'physical' : 'magical';
     const tempSkills = utils.getSkillSet(slicedPlayerProp[7]);
     for (let i = 0; i < tempSkills.length; i += 1) {
       this.skills.push(new tempSkills[i](this.name));
@@ -123,7 +124,7 @@ export default class Player {
     this.defaultSkills = {
       angrySkill: new AngrySkill(this.name),
       fortunateSkill: new FortunateSkill(this.name),
-      dodgeSkill: new DodgeSkill(this.name)
+      dodgeSkill: new DodgeSkill(this.name),
     };
     // END the property and skills settings.
   }

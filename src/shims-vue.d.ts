@@ -1,4 +1,4 @@
-/* eslint import/no-unresolved: "off" */
+/* eslint import/no-unresolved: "off", import/extensions: "off" */
 
 declare module '*.vue' {
   import Vue from 'vue';

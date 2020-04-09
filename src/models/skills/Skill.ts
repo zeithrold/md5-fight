@@ -1,13 +1,13 @@
 /* eslint @typescript-eslint/no-empty-function: "off", class-methods-use-this: "off" */
 
-import { GameAdditionalElement } from "../commons";
+import { GameAdditionalElement } from '../commons';
 
 export default class Skill implements GameAdditionalElement {
-  readonly id: string = "default-skill";
+  readonly id: string = 'default-skill';
 
-  readonly displayName: string = "Default display name";
+  readonly displayName: string = 'Default display name';
 
-  readonly description: string = "Default description";
+  readonly description: string = 'Default description';
 
   readonly owner: string;
 
@@ -15,7 +15,7 @@ export default class Skill implements GameAdditionalElement {
 
   power = 0;
 
-  effect(): void {}
+  effect(): void { }
 
   constructor(owner: string) {
     this.owner = owner;

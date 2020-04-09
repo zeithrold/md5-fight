@@ -1,6 +1,6 @@
-import FightModule from "@/store/fight";
-import LogsModule from "@/store/logs";
-import { getModule } from "vuex-module-decorators";
+import FightModule from '@/store/fight';
+import LogsModule from '@/store/logs';
+import { getModule } from 'vuex-module-decorators';
 
 export const fight = getModule(FightModule);
 export const logs = getModule(LogsModule);

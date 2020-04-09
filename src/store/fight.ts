@@ -1,20 +1,27 @@
-import { VuexModule, Module, Mutation, getModule } from "vuex-module-decorators";
-import store from "@/store";
-import LogModule from "./logs";
-import Player from "@/models/Player";
-import { Buff, BuffSlot } from "@/models/buffs";
+import {
+  VuexModule, Module, Mutation, getModule,
+} from 'vuex-module-decorators';
+import store from '@/store';
+import Player from '@/models/Player';
+import { Buff, BuffSlot } from '@/models/buffs';
+import LogModule from './logs';
 
 const logs = getModule(LogModule);
 
 @Module({
   dynamic: true,
   store,
-  name: "fight"
+  name: 'fight',
 })
 export default class FightModule extends VuexModule {
   players: { [key: string]: Player } = {
-    "玩家 1": new Player("玩家 1"),
-    "玩家 2": new Player("玩家 2")
+    '玩家 1': new Player('玩家 1'),
+    '玩家 2': new Player('玩家 2'),
+  };
+
+  order = {
+    first: '玩家 1',
+    second: '玩家 2',
   };
 
   @Mutation
@@ -52,10 +59,70 @@ export default class FightModule extends VuexModule {
     this.players = {};
     this.players[player1] = new Player(player1);
     this.players[player2] = new Player(player2);
+    let firstPlayer;
+    let secondPlayer;
+    if (this.players[player1].speed > this.players[player2].speed) {
+      firstPlayer = player1;
+      secondPlayer = player2;
+      logs.addLog({
+        message: `${player1}的速度较快，由${player1}先攻。`,
+      });
+    } else if (this.players[player1].speed < this.players[player2].speed) {
+      firstPlayer = player2;
+      secondPlayer = player1;
+      logs.addLog({
+        message: `${player2}的速度较快，由${player2}先攻。`,
+      });
+    } else {
+      logs.addLog({
+        message: '两位玩家的速度相同，攻击先后顺序将由抛硬币决定。',
+        bgColor: 'blue',
+      });
+      const random = Math.floor(Math.random() * 10) % 2 === 0 ? '正面' : '反面';
+      if (random === '正面') {
+        firstPlayer = player1;
+        secondPlayer = player2;
+      } else {
+        firstPlayer = player2;
+        secondPlayer = player1;
+      }
+      logs.addLog({
+        message: `抛硬币的结果为${random}，将由${firstPlayer}先攻。`,
+      });
+    }
+    this.order = {
+      first: firstPlayer,
+      second: secondPlayer,
+    };
+    if (
+      this.players[this.order.first].maxHealth === 0
+      && this.players[this.order.second].maxHealth !== 0
+    ) {
+      logs.addLog({
+        message: `${this.order.first}的初始生命值为0，自动判定${this.order.second}获胜。`,
+        bgColor: 'red',
+      });
+    } else if (
+      this.players[this.order.second].maxHealth === 0
+      && this.players[this.order.first].maxHealth !== 0
+    ) {
+      logs.addLog({
+        message: `${this.order.second}的初始生命值为0，自动判定${this.order.first}获胜。`,
+        bgColor: 'red',
+      });
+    } else if (
+      this.players[this.order.second].maxHealth === 0
+      && this.players[this.order.first].maxHealth === 0
+    ) {
+      logs.addLog({
+        message: '两位玩家初始生命值都为0，无胜负。',
+        bgColor: 'red',
+      });
+    }
   }
 
   @Mutation
-  addBuff(player: string, buff: Buff, duration: number | "forever", affectNow?: boolean) {
+  addBuff(player: string, buff: Buff, duration: number | 'forever', affectNow?: boolean) {
     // this.players[player].buffs.push({
     //   buff,
     //   created: false,
@@ -65,7 +132,7 @@ export default class FightModule extends VuexModule {
     const tempBuffSlot = {
       buff,
       duration,
-      created: false
+      created: false,
     };
     if (affectNow) {
       tempBuffSlot.buff.created();
@@ -91,7 +158,7 @@ export default class FightModule extends VuexModule {
             tempBuffSlot.created = true;
           }
           tempBuffSlot.buff.effect();
-          if (tempBuffSlot.duration !== "forever") {
+          if (tempBuffSlot.duration !== 'forever') {
             tempBuffSlot.duration -= 1;
             if (tempBuffSlot.duration === 0) {
               tempBuffSlot.buff.destroyed();
@@ -123,25 +190,25 @@ export default class FightModule extends VuexModule {
     }
     keys = keys.splice(index, 1);
     const oppositePlayerName = keys[0];
-    let oppositePlayer = this.players[oppositePlayerName];
+    const oppositePlayer = this.players[oppositePlayerName];
     logs.addLog({
-      message: `${player}向${oppositePlayerName}发动了攻击！`
+      message: `${player}向${oppositePlayerName}发动了攻击！`,
     });
     oppositePlayer.onBeingAttack();
     if (!oppositePlayer.buffProps.attackable) {
       return;
     }
     let tempAttackAmount = tempPlayer.attackPower.value;
-    if (tempPlayer.type === "physical") {
+    if (tempPlayer.type === 'physical') {
       const tempHealthDiscountAmount = oppositePlayer.physicalDefence.value * 0.5;
       logs.addLog({
-        message: `${player}向${oppositePlayerName}造成了${tempHealthDiscountAmount}的物理攻击！`
+        message: `${player}向${oppositePlayerName}造成了${tempHealthDiscountAmount}的物理攻击！`,
       });
       tempAttackAmount -= tempHealthDiscountAmount;
     } else {
       const tempHealthDiscountAmount = oppositePlayer.magicalDefence.value * 0.5;
       logs.addLog({
-        message: `${player}向${oppositePlayerName}造成了${tempHealthDiscountAmount}的物理攻击！`
+        message: `${player}向${oppositePlayerName}造成了${tempHealthDiscountAmount}的物理攻击！`,
       });
       tempAttackAmount -= oppositePlayer.magicalDefence.value * 0.5;
     }
