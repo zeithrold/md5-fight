@@ -4,7 +4,7 @@ import md5 from "blueimp-md5";
 // import { Skill } from '.'
 import { Skill, utils } from "./skills";
 import { BuffSlot } from "./buffs";
-import { AngrySkill, FortunateSkill } from "./skills";
+import { AngrySkill, FortunateSkill, DodgeSkill } from "./skills";
 
 export interface PlayerProp {
   value: number;
@@ -73,10 +73,12 @@ export default class Player {
   readonly defaultSkills: {
     angrySkill: AngrySkill;
     fortunateSkill: FortunateSkill;
+    dodgeSkill: DodgeSkill;
   };
 
   buffProps = {
-    freezed: false
+    freezed: false,
+    attackable: true
   };
 
   skillProps = {
@@ -120,7 +122,8 @@ export default class Player {
     }
     this.defaultSkills = {
       angrySkill: new AngrySkill(this.name),
-      fortunateSkill: new FortunateSkill(this.name)
+      fortunateSkill: new FortunateSkill(this.name),
+      dodgeSkill: new DodgeSkill(this.name)
     };
     // END the property and skills settings.
   }
@@ -143,6 +146,7 @@ export default class Player {
   }
 
   onBeingAttack() {
+    this.defaultSkills.dodgeSkill.effect();
     this.defaultSkills.fortunateSkill.effect();
   }
 }

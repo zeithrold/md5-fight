@@ -110,6 +110,25 @@ export default class FightModule extends VuexModule {
         tempSkill.effect();
       }
     }
-    // TODO: ADD FIGHT CODE.
+    let keys = Object.keys(this.players);
+    const index = keys.indexOf(player);
+    if (index === -1) {
+      throw ReferenceError("Cannot find the Player's name.");
+    }
+    keys = keys.splice(index, 1);
+    const oppositePlayerName = keys[0];
+    let oppositePlayer = this.players[oppositePlayerName];
+    oppositePlayer.onBeingAttack();
+    if (!oppositePlayer.buffProps.attackable) {
+      return;
+    }
+    let tempAttackAmount = tempPlayer.attackPower.value;
+    if (tempPlayer.type === "physical") {
+      tempAttackAmount -= oppositePlayer.physicalDefence.value * 0.5;
+    } else {
+      tempAttackAmount -= oppositePlayer.magicalDefence.value * 0.5;
+    }
+    tempAttackAmount = tempAttackAmount < 0 ? 0 : tempAttackAmount;
+    oppositePlayer.health -= tempAttackAmount;
   }
 }
