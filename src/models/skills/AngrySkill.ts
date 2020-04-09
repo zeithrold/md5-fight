@@ -20,5 +20,11 @@ export default class AngrySkill extends Skill {
     api.fight.addBuff(this.owner, new AngryStrongenBuff(this.owner), 0, true);
     const oppositePlayerName = api.getOppositePlayerName(this.owner);
     api.fight.addBuff(oppositePlayerName, new AngryWeakenBuff(oppositePlayerName), 0, true);
+    api.logs.addLog({
+      message: `${this.owner}的怒气值达到上限，最终爆发！${
+        this.owner
+      }的攻击力上升50%，对手${api.getOppositePlayerName(this.owner)}的防御力下降！`,
+      bgColor: `red`
+    });
   }
 }

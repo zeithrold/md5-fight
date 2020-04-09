@@ -17,6 +17,10 @@ export default class AngrySkill extends Skill {
     // const isDodge = tempPlayer.speed.value >= 100;
     if (random <= tempPlayer.speed.value) {
       api.fight.addBuff(this.owner, new DodgeNotAttackableBuff(this.owner), 0, true);
+      api.logs.addLog({
+        message: `${this.owner}成功闪避攻击！`,
+        bgColor: "blue"
+      });
     }
   }
 }

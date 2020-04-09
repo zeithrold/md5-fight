@@ -20,6 +20,10 @@ export default class FortunateSkill extends Skill {
         0,
         true
       );
+      api.logs.addLog({
+        message: `${this.owner}本轮十分的幸运，成功闪避攻击。`,
+        bgColor: "blue"
+      });
     }
   }
 }

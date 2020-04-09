@@ -1,8 +1,6 @@
 import FightModule from "@/store/fight";
 import LogsModule from "@/store/logs";
 import { getModule } from "vuex-module-decorators";
-// import { Log } from "./logs";
-// import Player from "./Player";
 
 export const fight = getModule(FightModule);
 export const logs = getModule(LogsModule);
@@ -16,6 +14,3 @@ export function getOppositePlayerName(player: string): string {
   keys = keys.splice(index, 1);
   return keys[0];
 }
-
-// applyEffect('helloworld', FreezeEffect);
-// TODO: Complete the full API.
