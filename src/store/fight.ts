@@ -59,7 +59,7 @@ export default class FightModule extends VuexModule {
     //   duration
     // });
     const tempPlayer = this.players[player];
-    let tempBuffSlot = {
+    const tempBuffSlot = {
       buff,
       duration,
       created: false
@@ -79,20 +79,24 @@ export default class FightModule extends VuexModule {
       const remainingBuffs: BuffSlot[] = [];
       for (let i = 0; i < tempPlayer.buffs.length; i += 1) {
         const tempBuffSlot = tempPlayer.buffs[i];
-        if (!tempBuffSlot.created) {
-          tempBuffSlot.buff.created();
-          tempBuffSlot.created = true;
-        }
-        tempBuffSlot.buff.effect();
-        if (tempBuffSlot.duration !== "forever") {
-          tempBuffSlot.duration -= 1;
-          if (tempBuffSlot.duration === 0) {
-            tempBuffSlot.buff.destroyed();
+        if (tempBuffSlot.duration !== 0) {
+          if (!tempBuffSlot.created) {
+            tempBuffSlot.buff.created();
+            tempBuffSlot.created = true;
+          }
+          tempBuffSlot.buff.effect();
+          if (tempBuffSlot.duration !== "forever") {
+            tempBuffSlot.duration -= 1;
+            if (tempBuffSlot.duration === 0) {
+              tempBuffSlot.buff.destroyed();
+            } else {
+              remainingBuffs.push(tempBuffSlot);
+            }
           } else {
             remainingBuffs.push(tempBuffSlot);
           }
         } else {
-          remainingBuffs.push(tempBuffSlot);
+          tempBuffSlot.buff.destroyed();
         }
       }
       tempPlayer.buffs = remainingBuffs;

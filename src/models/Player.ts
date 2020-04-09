@@ -1,7 +1,10 @@
+/* eslint prefer-destructuring: "off" */
+
 import md5 from "blueimp-md5";
 // import { Skill } from '.'
 import { Skill, utils } from "./skills";
 import { BuffSlot } from "./buffs";
+import { AngrySkill, FortunateSkill } from "./skills";
 
 export interface PlayerProp {
   value: number;
@@ -22,7 +25,7 @@ export default class Player {
   /**
    * The private health var of the Player.
    */
-  _health: number;
+  internalHealth: number;
 
   /**
    * The power of attack of the player. It'll be taken mainly during the main attack.
@@ -45,24 +48,32 @@ export default class Player {
 
   /**
    * The basic physical defence amount of the player.
-   * When a physical attack occurs, the amount of the attack will be discounted by the physical defence amount in a proper proportion.
+   * When a physical attack occurs, the amount of the attack will
+   * be discounted by the physical defence amount in a proper proportion.
    * @generatedFromMD5 This Prop is auto-generated from the md5-hex of the name.
    */
   physicalDefence: PlayerProp;
 
   /**
    * The basic magical defence amount of the player.
-   * When a magical attack occurs, the amount of the attack will be discounted by the magical defence amount in a proper proportion.
+   * When a magical attack occurs, the amount of the attack
+   * will be discounted by the magical defence amount in a proper proportion.
    * @generatedFromMD5 This Prop is auto-generated from the md5-hex of the name.
    */
   magicalDefence: PlayerProp;
 
   /**
-   * The skill array of the Player. When turned to a player, after the player's all the buff affects it's skills affects.
+   * The skill array of the Player. When turned to a player,
+   * after the player's all the buff affects it's skills affects.
    * More information see class `Skill`'s document.
    * @generatedFromMD5 Player's skill set is auto-generated from the md5-hex of the name.
    */
   readonly skills: Skill[] = [];
+
+  readonly defaultSkills: {
+    angrySkill: AngrySkill;
+    fortunateSkill: FortunateSkill;
+  };
 
   buffProps = {
     freezed: false
@@ -95,7 +106,7 @@ export default class Player {
     } // Slice the MD5-hex into 8 parts which each of them contains 2 chars.
     // Then convert it to [0, 100] 10-radix number.
     // BEGIN the property and skills settings.
-    this._health = slicedPlayerProp[0];
+    this.internalHealth = slicedPlayerProp[0];
     this.maxHealth = slicedPlayerProp[0];
     this.attackPower = { value: slicedPlayerProp[1], default: slicedPlayerProp[1] };
     this.speed = { value: slicedPlayerProp[2], default: slicedPlayerProp[2] };
@@ -107,11 +118,15 @@ export default class Player {
     for (let i = 0; i < tempSkills.length; i += 1) {
       this.skills.push(new tempSkills[i](this.name));
     }
+    this.defaultSkills = {
+      angrySkill: new AngrySkill(this.name),
+      fortunateSkill: new FortunateSkill(this.name)
+    };
     // END the property and skills settings.
   }
 
   get health() {
-    return this._health;
+    return this.internalHealth;
   }
 
   /**
@@ -120,10 +135,14 @@ export default class Player {
    */
   set health(value: number) {
     const tempValue = value <= 0 ? 0 : value;
-    if (tempValue < this._health) {
-      const delta = this._health - tempValue;
-      this.skillProps.anger = this.skillProps.anger + delta * 0.25;
+    if (tempValue < this.internalHealth) {
+      const delta = this.internalHealth - tempValue;
+      this.skillProps.anger += delta * 0.25;
     }
-    this._health = tempValue;
+    this.internalHealth = tempValue;
+  }
+
+  onBeingAttack() {
+    this.defaultSkills.fortunateSkill.effect();
   }
 }

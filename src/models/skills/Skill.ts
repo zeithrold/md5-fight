@@ -1,12 +1,13 @@
-import { GameAdditionalElement } from '../commons';
-import { Log } from '../logs';
+/* eslint @typescript-eslint/no-empty-function: "off", class-methods-use-this: "off" */
+
+import { GameAdditionalElement } from "../commons";
 
 export default class Skill implements GameAdditionalElement {
-  readonly id: string = 'default-skill';
+  readonly id: string = "default-skill";
 
-  readonly displayName: string = 'Default display name';
+  readonly displayName: string = "Default display name";
 
-  readonly description: string = 'Default description';
+  readonly description: string = "Default description";
 
   readonly owner: string;
 
