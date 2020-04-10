@@ -20,6 +20,6 @@ export default class FortunateWeakenBuff extends Buff {
 
   destroyed() {
     const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.fortunate.value = tempPlayer.fortunate.default;
+    tempPlayer.attackPower.value = tempPlayer.attackPower.default;
   }
 }

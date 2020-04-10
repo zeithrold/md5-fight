@@ -3,13 +3,13 @@ import { AngryStrongenBuff, AngryWeakenBuff } from '../buffs';
 import * as api from '../api';
 
 export default class AngrySkill extends Skill {
-  id = 'angry-skill';
+  readonly id = 'angry-skill';
 
-  displayName = '愤怒';
+  readonly displayName = '愤怒';
 
-  description = '若玩家的愤怒达到上限，则使自己的攻击力上升50%，对手防御力下降50%。';
+  readonly description = '若玩家的愤怒达到上限，则使自己的攻击力上升50%，对手防御力下降50%。';
 
-  quote = '一时容忍，不能一世容忍。';
+  readonly quote = '一时容忍，不能一世容忍。';
 
   effect() {
     const tempPlayer = api.fight.players[this.owner];

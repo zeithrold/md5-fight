@@ -24,6 +24,8 @@ export default class FightModule extends VuexModule {
     second: '玩家 2',
   };
 
+  isEnded = false;
+
   @Mutation
   setPhysicalDefence(player: string, physicalDefence: number) {
     this.players[player].physicalDefence.value = physicalDefence;
@@ -119,6 +121,7 @@ export default class FightModule extends VuexModule {
         bgColor: 'red',
       });
     }
+    logs.pushLogs();
   }
 
   @Mutation
@@ -214,5 +217,49 @@ export default class FightModule extends VuexModule {
     }
     tempAttackAmount = tempAttackAmount < 0 ? 0 : tempAttackAmount;
     oppositePlayer.health -= tempAttackAmount;
+  }
+
+  @Mutation
+  newRound() {
+    const firstPlayer = this.players[this.order.first];
+    this.beginFight(this.order.first);
+    if (firstPlayer.health === 0) {
+      logs.addLog({
+        message: `${this.order.first}已阵亡！`,
+        bgColor: 'red',
+      });
+      this.isEnded = true;
+    }
+    this.beginFight(this.order.second);
+    this.checkAlive();
+    if (this.isEnded) return;
+    this.beginFight(this.order.second);
+    this.checkAlive();
+  }
+
+  @Mutation
+  checkAlive() {
+    if (
+      this.players[this.order.first].health === 0 && this.players[this.order.second].health !== 0) {
+      logs.addLog({
+        message: `${this.order.first}已阵亡！`,
+        bgColor: 'red',
+      });
+      this.isEnded = true;
+    } else if (
+      this.players[this.order.second].health === 0 && this.players[this.order.first].health !== 0) {
+      logs.addLog({
+        message: `${this.order.second}已阵亡！`,
+        bgColor: 'red',
+      });
+      this.isEnded = true;
+    } else if (
+      this.players[this.order.first].health === 0 && this.players[this.order.second].health === 0) {
+      logs.addLog({
+        message: `${this.order.first}与${this.order.second}同时阵亡！`,
+        bgColor: 'red',
+      });
+      this.isEnded = true;
+    }
   }
 }
