@@ -1,5 +1,4 @@
 import Buff from './Buff';
-import * as api from '../api';
 
 export default class AngryStrongenBuff extends Buff {
   readonly id: string = 'angry-strongen-buff';
@@ -14,12 +13,11 @@ export default class AngryStrongenBuff extends Buff {
 
 
   created() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.attackPower.value *= 1.5;
+    const tempPlayer = this.store.state.fight.players[this.owner];
+    this.api.setPlayerAttackPower({ id: this.owner, amount: tempPlayer.attackPower.value * 1.5 });
   }
 
   destroyed() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.attackPower.value = tempPlayer.attackPower.default;
+    this.api.setPlayerAttackPower({ id: this.owner, amount: 'default' });
   }
 }

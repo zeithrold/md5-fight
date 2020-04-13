@@ -1,5 +1,4 @@
 import Buff from './Buff';
-import * as api from '../api';
 
 export default class LanguageInfluenceWeakenBuff extends Buff {
   readonly id: string = 'language-influence-weaken-buff';
@@ -13,12 +12,11 @@ export default class LanguageInfluenceWeakenBuff extends Buff {
   readonly type = 'negative';
 
   created() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.attackPower.value *= 0.5;
+    const tempPlayer = this.store.state.fight.players[this.owner];
+    this.api.setPlayerAttackPower({ id: this.owner, amount: tempPlayer.attackPower.value * 0.5 });
   }
 
   destroyed() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.attackPower.value = tempPlayer.attackPower.default;
+    this.api.setPlayerAttackPower({ id: this.owner, amount: 'default' });
   }
 }

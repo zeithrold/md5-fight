@@ -1,5 +1,4 @@
 import Buff from './Buff';
-import * as api from '../api';
 
 export default class DodgeNotAttackableBuff extends Buff {
   readonly id: string = 'dodge-buff';
@@ -13,12 +12,10 @@ export default class DodgeNotAttackableBuff extends Buff {
   readonly type = 'positive';
 
   created() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.buffProps.attackable = false;
+    this.api.setPlayerAttackable({ id: this.owner, context: false });
   }
 
   destroyed() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.buffProps.attackable = true;
+    this.api.setPlayerAttackable({ id: this.owner, context: true });
   }
 }

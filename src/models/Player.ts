@@ -77,13 +77,19 @@ export default class Player {
     dodgeSkill: DodgeSkill;
   };
 
-  buffProps = {
+  // buffProps = {
+  //   freezed: false,
+  //   attackable: true,
+  // };
+
+  // skillProps = {
+  //   // freezed: false,
+  //   anger: 0,
+  // };
+
+  props = {
     freezed: false,
     attackable: true,
-  };
-
-  skillProps = {
-    // freezed: false,
     anger: 0,
   };
 
@@ -141,7 +147,7 @@ export default class Player {
     const tempValue = value <= 0 ? 0 : value;
     if (tempValue < this.internalHealth) {
       const delta = this.internalHealth - tempValue;
-      this.skillProps.anger += delta * 0.25;
+      this.props.anger += delta * 0.25;
     }
     this.internalHealth = tempValue;
   }

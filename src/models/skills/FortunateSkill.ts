@@ -1,5 +1,4 @@
 import Skill from './Skill';
-import * as api from '../api';
 import { FortunateWeakenBuff } from '../buffs';
 
 export default class FortunateSkill extends Skill {
@@ -13,16 +12,16 @@ export default class FortunateSkill extends Skill {
 
 
   effect() {
-    const tempPlayer = api.fight.players[this.owner];
+    const tempPlayer = this.store.state.fight.players[this.owner];
     const random = Math.floor(Math.random() * 100);
     if (random <= tempPlayer.fortunate.value) {
-      api.fight.addBuff(
-        api.getOppositePlayerName(this.owner),
-        new FortunateWeakenBuff(api.getOppositePlayerName(this.owner)),
-        0,
-        true,
-      );
-      api.logs.addLog({
+      this.api.addBuff({
+        player: this.getOppositePlayerName(this.owner),
+        buff: new FortunateWeakenBuff(this.getOppositePlayerName(this.owner)),
+        duration: 0,
+        affectNow: true,
+      });
+      this.api.addLog({
         message: `${this.owner}本轮十分的幸运，使对方的攻击力降低了${tempPlayer.fortunate.value}%。`,
         bgColor: 'blue',
       });

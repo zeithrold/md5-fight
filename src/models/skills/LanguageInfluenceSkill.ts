@@ -1,5 +1,4 @@
 import Skill from './Skill';
-import * as api from '../api';
 import { LanguageInfluenceFreezedBuff, LanguageInfluenceWeakenBuff } from '../buffs';
 
 export default class LanguageInfluenceSkill extends Skill {
@@ -16,22 +15,24 @@ export default class LanguageInfluenceSkill extends Skill {
     // const tempPlayer = api.fight.players[this.owner];
     const random = Math.floor(Math.random() * 100);
     if (random <= 20) {
-      api.fight.addBuff(
-        api.getOppositePlayerName(this.owner),
-        new LanguageInfluenceFreezedBuff(api.getOppositePlayerName(this.owner)),
-        1,
-      );
-      api.logs.addLog({
+      this.api.addBuff({
+        player: this.getOppositePlayerName(this.owner),
+        buff: new LanguageInfluenceFreezedBuff(this.getOppositePlayerName(this.owner)),
+        duration: 1,
+      });
+      this.api.addLog({
         message: `${this.owner}的技能${this.displayName}发动！被攻击者下一轮无法攻击。`,
         bgColor: 'blue',
       });
     } else if (random > 20 && random <= 50) {
-      api.fight.addBuff(
-        api.getOppositePlayerName(this.owner),
-        new LanguageInfluenceWeakenBuff(api.getOppositePlayerName(this.owner)),
-        1,
+      this.api.addBuff(
+        {
+          player: this.getOppositePlayerName(this.owner),
+          buff: new LanguageInfluenceWeakenBuff(this.getOppositePlayerName(this.owner)),
+          duration: 1,
+        },
       );
-      api.logs.addLog({
+      this.api.addLog({
         message: `${this.owner}的技能${this.displayName}发动！被攻击者下一轮攻击力降低50%。`,
         bgColor: 'blue',
       });

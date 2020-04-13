@@ -1,5 +1,4 @@
 import Skill from './Skill';
-import * as api from '../api';
 import { PoisonBuff } from '../buffs';
 
 export default class WizardSkill extends Skill {
@@ -14,15 +13,15 @@ export default class WizardSkill extends Skill {
   effect() {
     const isAffect = Math.floor(Math.random() * 100) <= 15;
     if (isAffect) {
-      api.logs.addLog({
+      this.api.addLog({
         message: `玩家${this.owner}的技能${this.displayName}发动！向被攻击者施加5回合的"毒药"效果。`,
         bgColor: 'blue',
       });
-      api.fight.addBuff(
-        api.getOppositePlayerName(this.owner),
-        new PoisonBuff(api.getOppositePlayerName(this.owner)),
-        5,
-      );
+      this.api.addBuff({
+        player: this.getOppositePlayerName(this.owner),
+        buff: new PoisonBuff(this.getOppositePlayerName(this.owner)),
+        duration: 5,
+      });
     }
   }
 }

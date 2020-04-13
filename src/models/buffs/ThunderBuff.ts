@@ -1,5 +1,4 @@
 import Buff from './Buff';
-import * as api from '../api';
 
 export default class ThunderBuff extends Buff {
   readonly id = 'thunder-buff';
@@ -15,10 +14,13 @@ export default class ThunderBuff extends Buff {
   effect() {
     const coinResult = Math.floor(Math.random() * 10) % 2 === 0;
     if (coinResult) {
-      api.logs.addLog({
+      this.api.addLog({
         message: `玩家${this.owner}的效果"${this.displayName}"被触发，玩家的生命值减半。`,
       });
-      api.fight.players[this.owner].health *= 0.5;
+      this.api.decreasePlayerHealth({
+        id: this.owner,
+        amount: this.store.state.fight.players[this.owner].health * 0.5,
+      });
     }
   }
 }

@@ -1,5 +1,4 @@
 import Skill from './Skill';
-import * as api from '../api';
 import { GambleKingDefenceLostEffectBuff } from '../buffs';
 
 export default class GambleKingSkill extends Skill {
@@ -16,29 +15,32 @@ export default class GambleKingSkill extends Skill {
   effect() {
     const isAffects = Math.floor(Math.random() * 10) <= 4;
     if (isAffects) {
-      api.logs.addLog({
+      this.api.addLog({
         message: `玩家${this.owner}的技能${this.displayName}发动！开始丢一枚硬币。`,
         bgColor: 'blue',
       });
       const coinResult = Math.floor(Math.random() * 10) % 2 === 0;
       if (coinResult) {
-        api.logs.addLog({
+        this.api.addLog({
           message: '丢硬币的结果为「正面」，本轮攻击被攻击者的防御无效。',
           bgColor: 'blue',
         });
-        const tempOppositePlayerName = api.getOppositePlayerName(this.owner);
-        api.fight.addBuff(
-          tempOppositePlayerName,
-          new GambleKingDefenceLostEffectBuff(tempOppositePlayerName),
-          0,
-          true,
-        );
+        const tempOppositePlayerName = this.getOppositePlayerName(this.owner);
+        this.api.addBuff({
+          player: tempOppositePlayerName,
+          buff: new GambleKingDefenceLostEffectBuff(tempOppositePlayerName),
+          duration: 0,
+          affectNow: true,
+        });
       } else {
-        api.logs.addLog({
+        this.api.addLog({
           message: '丢硬币的结果为「反面」，攻击者在攻击前生命值减少最大生命值的30%。',
           bgColor: 'red',
         });
-        api.fight.decreaseHealth(this.owner, api.fight.players[this.owner].maxHealth * 0.3);
+        this.api.decreasePlayerHealth({
+          id: this.owner,
+          amount: this.store.state.fight.players[this.owner].maxHealth * 0.3,
+        });
       }
     }
   }

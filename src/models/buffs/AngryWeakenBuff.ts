@@ -1,5 +1,5 @@
 import Buff from './Buff';
-import * as api from '../api';
+
 
 export default class AngryWeakenBuff extends Buff {
   readonly id: string = 'angry-weaken-buff';
@@ -13,14 +13,24 @@ export default class AngryWeakenBuff extends Buff {
   readonly type = 'negative';
 
   created() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.magicalDefence.value *= 0.5;
-    tempPlayer.physicalDefence.value *= 0.5;
+    const tempPlayer = this.store.state.fight.players[this.owner];
+    this.api.setPlayerMagicalDefence(
+      {
+        id: this.owner,
+        amount: tempPlayer.magicalDefence.value * 0.5,
+      },
+    );
+    this.api.setPlayerPhysicalDefence(
+      { id: this.owner, amount: tempPlayer.physicalDefence.value * 0.5 },
+    );
   }
 
   destroyed() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.physicalDefence.value = tempPlayer.physicalDefence.default;
-    tempPlayer.magicalDefence.value = tempPlayer.magicalDefence.default;
+    this.api.setPlayerMagicalDefence(
+      { id: this.owner, amount: 'default' },
+    );
+    this.api.setPlayerPhysicalDefence(
+      { id: this.owner, amount: 'default' },
+    );
   }
 }

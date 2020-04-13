@@ -1,5 +1,4 @@
 import Skill from './Skill';
-import * as api from '../api';
 import { ThunderBuff } from '../buffs';
 
 export default class ThunderSkill extends Skill {
@@ -14,16 +13,16 @@ export default class ThunderSkill extends Skill {
   effect() {
     const isAffect = Math.floor(Math.random() * 100) <= 15;
     if (isAffect) {
-      api.logs.addLog({
+      this.api.addLog({
         message: `玩家${this.owner}的技能${this.displayName}发动！向被攻击者施加"雷电法术: 雷阵雨"效果`,
         bgColor: 'blue',
       });
-      const tempOppositePlayerName = api.getOppositePlayerName(this.owner);
-      api.fight.addBuff(
-        tempOppositePlayerName,
-        new ThunderBuff(tempOppositePlayerName),
-        1,
-      );
+      const tempOppositePlayerName = this.getOppositePlayerName(this.owner);
+      this.api.addBuff({
+        player: tempOppositePlayerName,
+        buff: new ThunderBuff(tempOppositePlayerName),
+        duration: 1,
+      });
     }
   }
 }

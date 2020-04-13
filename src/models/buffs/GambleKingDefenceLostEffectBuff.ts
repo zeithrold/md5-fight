@@ -1,5 +1,4 @@
 import Buff from './Buff';
-import * as api from '../api';
 
 export default class GambleKingDefenceLostEffectBuff extends Buff {
   readonly id: string = 'gamble-king-defence-lost-effect-buff';
@@ -13,14 +12,24 @@ export default class GambleKingDefenceLostEffectBuff extends Buff {
   readonly type = 'negative';
 
   created() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.physicalDefence.value = 0;
-    tempPlayer.magicalDefence.value = 0;
+    this.api.setPlayerMagicalDefence({
+      id: this.owner,
+      amount: 0,
+    });
+    this.api.setPlayerPhysicalDefence({
+      id: this.owner,
+      amount: 0,
+    });
   }
 
   destroyed() {
-    const tempPlayer = api.fight.players[this.owner];
-    tempPlayer.physicalDefence.value = tempPlayer.physicalDefence.default;
-    tempPlayer.magicalDefence.value = tempPlayer.magicalDefence.default;
+    this.api.setPlayerPhysicalDefence({
+      id: this.owner,
+      amount: 'default',
+    });
+    this.api.setPlayerMagicalDefence({
+      id: this.owner,
+      amount: 'default',
+    });
   }
 }
