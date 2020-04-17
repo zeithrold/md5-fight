@@ -1,3 +1,4 @@
+import store from '@/store';
 import Buff from './Buff';
 
 export default class ThunderBuff extends Buff {
@@ -15,11 +16,12 @@ export default class ThunderBuff extends Buff {
     const coinResult = Math.floor(Math.random() * 10) % 2 === 0;
     if (coinResult) {
       this.api.addLog({
-        message: `玩家${this.owner}的效果"${this.displayName}"被触发，玩家的生命值减半。`,
+        message: `<b>${this.owner}</b>的效果"<b>${this.displayName}</b>"被触发，玩家的生命值减半。`,
+        bgColor: 'error',
       });
       this.api.decreasePlayerHealth({
         id: this.owner,
-        amount: this.store.state.fight.players[this.owner].health * 0.5,
+        amount: Math.floor(store.state.fight.players[this.owner].health * 0.5 * 100) / 100,
       });
     }
   }

@@ -14,17 +14,17 @@ export default class LanguageInfluenceSkill extends Skill {
   effect() {
     // const tempPlayer = api.fight.players[this.owner];
     const random = Math.floor(Math.random() * 100);
-    if (random <= 20) {
+    if (random <= 10) {
       this.api.addBuff({
         player: this.getOppositePlayerName(this.owner),
         buff: new LanguageInfluenceFreezedBuff(this.getOppositePlayerName(this.owner)),
         duration: 1,
       });
       this.api.addLog({
-        message: `${this.owner}的技能${this.displayName}发动！被攻击者下一轮无法攻击。`,
-        bgColor: 'blue',
+        message: `<b>${this.owner}</b>的技能<b>${this.displayName}</b>发动！被攻击者下一轮无法攻击。`,
+        bgColor: 'primary',
       });
-    } else if (random > 20 && random <= 50) {
+    } else if (random > 10 && random <= 30) {
       this.api.addBuff(
         {
           player: this.getOppositePlayerName(this.owner),
@@ -33,8 +33,8 @@ export default class LanguageInfluenceSkill extends Skill {
         },
       );
       this.api.addLog({
-        message: `${this.owner}的技能${this.displayName}发动！被攻击者下一轮攻击力降低50%。`,
-        bgColor: 'blue',
+        message: `<b>${this.owner}</b>的技能<b>${this.displayName}</b>发动！被攻击者下一轮攻击力降低50%。`,
+        bgColor: 'primary',
       });
     }
   }

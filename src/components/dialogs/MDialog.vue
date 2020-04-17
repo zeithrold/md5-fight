@@ -14,9 +14,11 @@
         </v-btn>
         <v-toolbar-title>{{ $props.title }}</v-toolbar-title>
         <v-subheader>{{ $props.subtitle }}</v-subheader>
+        <v-spacer></v-spacer>
+        <v-toolbar-items><slot name="toolbaractions"></slot></v-toolbar-items>
       </v-toolbar>
       <slot name="pinned"></slot>
-      <v-card-text><slot></slot> Hello</v-card-text>
+      <v-card-text><slot></slot></v-card-text>
     </v-card>
   </v-dialog>
 </template>

@@ -1,3 +1,4 @@
+import store from '@/store';
 import Buff from './Buff';
 
 export default class LanguageInfluenceWeakenBuff extends Buff {
@@ -12,7 +13,7 @@ export default class LanguageInfluenceWeakenBuff extends Buff {
   readonly type = 'negative';
 
   created() {
-    const tempPlayer = this.store.state.fight.players[this.owner];
+    const tempPlayer = store.state.fight.players[this.owner];
     this.api.setPlayerAttackPower({ id: this.owner, amount: tempPlayer.attackPower.value * 0.5 });
   }
 

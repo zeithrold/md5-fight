@@ -12,6 +12,7 @@ export const SET_PLAYER = 'SET_PLAYER';
 export const SET_PLAYER_ROLE_ORDER = 'SET_PLAYER_ROLE_ORDER';
 export const PLAYER_ADD_BUFF = 'PLAYER_ADD_BUFF';
 export const BEGIN_FIGHT = 'BEGIN_FIGHT';
+export const ANNOUNCE_PLAYER_DEATH = 'ANNOUNCE_PLAYER_DEATH';
 export const NEW_ROUND = 'NEW_ROUND';
 export const CHECK_ALUVE = 'CHECK_ALIVE';
 export const LOG_ADD = 'LOG_ADD';

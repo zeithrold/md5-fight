@@ -14,8 +14,8 @@ export default class WizardSkill extends Skill {
     const isAffect = Math.floor(Math.random() * 100) <= 15;
     if (isAffect) {
       this.api.addLog({
-        message: `玩家${this.owner}的技能${this.displayName}发动！向被攻击者施加5回合的"毒药"效果。`,
-        bgColor: 'blue',
+        message: `<b>${this.owner}</b>的技能<b>${this.displayName}</b>发动！向被攻击者施加5回合的"<b>毒药</b>"效果。`,
+        bgColor: 'primary',
       });
       this.api.addBuff({
         player: this.getOppositePlayerName(this.owner),

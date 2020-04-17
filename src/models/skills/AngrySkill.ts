@@ -1,3 +1,4 @@
+import store from '@/store';
 import Skill from './Skill';
 import { AngryStrongenBuff, AngryWeakenBuff } from '../buffs';
 
@@ -11,7 +12,7 @@ export default class AngrySkill extends Skill {
   readonly quote = '一时容忍，不能一世容忍。';
 
   effect() {
-    const tempPlayer = this.store.state.fight.players[this.owner];
+    const tempPlayer = store.state.fight.players[this.owner];
     const isAngry = tempPlayer.props.anger >= 100;
     if (!isAngry) {
       return;
@@ -19,7 +20,7 @@ export default class AngrySkill extends Skill {
     this.api.setPlayerAnger(
       {
         id: this.owner,
-        amount: this.store.state.fight.players[this.owner].props.anger - 100,
+        amount: store.state.fight.players[this.owner].props.anger - 100,
       },
     );
     this.api.addBuff({
@@ -36,9 +37,9 @@ export default class AngrySkill extends Skill {
       affectNow: true,
     });
     this.api.addLog({
-      message: `${this.owner}的怒气值达到上限，最终爆发！${
-        this.owner}的攻击力上升50%，对手${this.getOppositePlayerName(this.owner)}的防御力下降！`,
-      bgColor: 'red',
+      message: `<b>${this.owner}</b>的怒气值达到上限，最终爆发！<b>${
+        this.owner}</b>的攻击力上升50%，对手<b>${this.getOppositePlayerName(this.owner)}</b>的防御力下降50%！`,
+      bgColor: 'error',
     });
   }
 }

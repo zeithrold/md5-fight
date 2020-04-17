@@ -17,7 +17,7 @@ export default class LanguageInfluenceFreezedBuff extends Buff {
 
   effect() {
     this.api.addLog({
-      message: `受技能${this.displayName}影响，玩家${this.owner}本轮无法攻击。`,
+      message: `受技能<b>${this.displayName}</b>影响，<b>${this.owner}</b>本轮无法攻击。`,
     });
   }
 

@@ -1,3 +1,4 @@
+import store from '@/store';
 import Buff from './Buff';
 
 export default class FortunateWeakenBuff extends Buff {
@@ -12,18 +13,18 @@ export default class FortunateWeakenBuff extends Buff {
   readonly type = 'negative';
 
   created() {
-    const tempPlayer = this.store.state.fight.players[this.owner];
-    const oppositePlayer = this.store.state.fight.players[this.getOppositePlayerName(this.owner)];
+    const tempPlayer = store.state.fight.players[this.owner];
+    const oppositePlayer = store.state.fight.players[this.getOppositePlayerName(this.owner)];
     this.api.setPlayerAttackPower(
       {
-        id: oppositePlayer.name,
-        amount: ((oppositePlayer.attackPower.value * tempPlayer.fortunate.value) / 100),
+        id: this.owner,
+        amount: ((tempPlayer.attackPower.value * oppositePlayer.fortunate.value) / 100),
       },
     );
   }
 
   destroyed() {
-    const tempPlayer = this.store.state.fight.players[this.owner];
+    const tempPlayer = store.state.fight.players[this.owner];
     this.api.setPlayerAttackPower({
       id: tempPlayer.name,
       amount: 'default',

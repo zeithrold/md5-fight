@@ -6,7 +6,7 @@ describe('log-api', () => {
   it('addLog with object', () => {
     commits.addLog({
       message: '这是一个测试',
-      bgColor: 'blue',
+      bgColor: 'primary',
     });
     expect(store.state.logs.unstagedLogs[0].message).toBe('这是一个测试');
     expect(store.state.logs.unstagedLogs[0].bgColor).toBe('blue');

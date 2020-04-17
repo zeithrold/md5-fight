@@ -86,6 +86,8 @@ const mutations = {
     Vue.set(state, 'players', {});
     Vue.set(state.players, payload.players[0], new Player(payload.players[0]));
     Vue.set(state.players, payload.players[1], new Player(payload.players[1]));
+    api.clearLogs();
+    api.setPlayerRoleOrder();
   },
   [types.SET_PLAYER_ROLE_ORDER](state: State) {
     const player1 = Object.keys(state.players)[0];
@@ -96,18 +98,18 @@ const mutations = {
       firstPlayer = player1;
       secondPlayer = player2;
       api.addLog({
-        message: `${player1}的速度较快，由${player1}先攻。`,
+        message: `<b>${player1}</b>的速度较快，由<b>${player1}</b>先攻。`,
       });
     } else if (state.players[player1].speed.value < state.players[player2].speed.value) {
       firstPlayer = player2;
       secondPlayer = player1;
       api.addLog({
-        message: `${player2}的速度较快，由${player2}先攻。`,
+        message: `<b>${player2}</b>的速度较快，由<b>${player2}</b>先攻。`,
       });
     } else {
       api.addLog({
         message: '两位玩家的速度相同，攻击先后顺序将由抛硬币决定。',
-        bgColor: 'blue',
+        bgColor: 'primary',
       });
       const random = Math.floor(Math.random() * 10) % 2 === 0 ? '正面' : '反面';
       if (random === '正面') {
@@ -118,7 +120,7 @@ const mutations = {
         secondPlayer = player1;
       }
       api.addLog({
-        message: `抛硬币的结果为${random}，将由${firstPlayer}先攻。`,
+        message: `抛硬币的结果为<b>${random}</b>，将由<b>${firstPlayer}</b>先攻。`,
       });
     }
     Vue.set(state, 'order', {
@@ -130,16 +132,16 @@ const mutations = {
       && state.players[state.order.second].maxHealth !== 0
     ) {
       api.addLog({
-        message: `${state.order.first}的初始生命值为0，自动判定${state.order.second}获胜。`,
-        bgColor: 'red',
+        message: `<b>${state.order.first}</b>的初始生命值为0，自动判定<b>${state.order.second}</b>获胜。`,
+        bgColor: 'error',
       });
     } else if (
       state.players[state.order.second].maxHealth === 0
       && state.players[state.order.first].maxHealth !== 0
     ) {
       api.addLog({
-        message: `${state.order.second}的初始生命值为0，自动判定${state.order.first}获胜。`,
-        bgColor: 'red',
+        message: `<b>${state.order.second}</b>的初始生命值为0，自动判定<b>${state.order.first}</b>获胜。`,
+        bgColor: 'error',
       });
     } else if (
       state.players[state.order.second].maxHealth === 0
@@ -147,7 +149,7 @@ const mutations = {
     ) {
       api.addLog({
         message: '两位玩家初始生命值都为0，无胜负。',
-        bgColor: 'red',
+        bgColor: 'error',
       });
     }
     api.pushLogs();
@@ -187,21 +189,24 @@ const mutations = {
           tempBuffSlot.buff.effect();
           if (tempBuffSlot.duration !== 'forever') {
             tempBuffSlot.duration -= 1;
-            if (tempBuffSlot.duration === 0) {
-              tempBuffSlot.buff.destroyed();
-            } else {
-              remainingBuffs.push(tempBuffSlot);
-            }
+            remainingBuffs.push(tempBuffSlot);
           } else {
             remainingBuffs.push(tempBuffSlot);
           }
         } else {
+          // console.log(`${tempBuffSlot.buff.id} destroyed`);
           tempBuffSlot.buff.destroyed();
         }
       }
       Vue.set(tempPlayer, 'buffs', remainingBuffs);
     }
+    if (tempPlayer.health === 0) {
+      api.announcePlayerDeath(payload.player);
+      return;
+    }
     if (tempPlayer.props.freezed) {
+      // console.log('freezed');
+      // console.log(tempPlayer.buffs);
       return;
     }
     if (tempPlayer.skills) {
@@ -209,6 +214,22 @@ const mutations = {
         const tempSkill = tempPlayer.skills[i];
         tempSkill.effect();
       }
+    }
+    const players = Object.values(state.players);
+    let hasPlayerDeath = false;
+    for (let i = 0; i < players.length; i += 1) {
+      if (players[i].health === 0) hasPlayerDeath = true;
+    }
+    if (hasPlayerDeath) {
+      if (players[0].health === 0 && players[1].health === 0) {
+        api.announcePlayerDeath(`${players[0].name} 与 ${players[1].name}`);
+      } else {
+        const deathPlayer = players.find(
+          (player) => (player.health === 0 ? player : undefined),
+        )?.name;
+        api.announcePlayerDeath(`${deathPlayer}`);
+      }
+      return;
     }
     const keys = Object.keys(state.players);
     const index = keys.indexOf(payload.player);
@@ -221,7 +242,7 @@ const mutations = {
     // console.log(oppositePlayerName);
     const oppositePlayer = state.players[oppositePlayerName];
     api.addLog({
-      message: `${payload.player}向${oppositePlayerName}发动了攻击！`,
+      message: `<b>${payload.player}</b>向<b>${oppositePlayerName}</b>发动了攻击！`,
     });
     oppositePlayer.onBeingAttack();
     if (!oppositePlayer.props.attackable) {
@@ -232,25 +253,40 @@ const mutations = {
       const tempAttackDiscountAmount = oppositePlayer.physicalDefence.value * 0.5;
       tempAttackAmount -= tempAttackDiscountAmount;
       tempAttackAmount = tempAttackAmount < 0 ? 0 : tempAttackAmount;
+      tempAttackAmount = Math.floor(tempAttackAmount * 100) / 100;
       api.addLog({
-        message: `${payload.player}向${oppositePlayerName}造成了${tempAttackAmount}的物理攻击！`,
+        message: `<b>${payload.player}</b>向<b>${oppositePlayerName}</b>造成了<b>${tempAttackAmount}</b>的物理伤害！`,
       });
     } else {
       const tempAttackDiscountAmount = oppositePlayer.magicalDefence.value * 0.5;
       tempAttackAmount -= tempAttackDiscountAmount;
       tempAttackAmount = tempAttackAmount < 0 ? 0 : tempAttackAmount;
+      tempAttackAmount = Math.floor(tempAttackAmount * 100) / 100;
       api.addLog({
-        message: `${payload.player}向${oppositePlayerName}造成了${tempAttackAmount}的物理攻击！`,
+        message: `<b>${payload.player}</b>向<b>${oppositePlayerName}</b>造成了<b>${tempAttackAmount}</b>的法术伤害！`,
       });
     }
-    this.PLAYER_DECREASE_HEALTH(state, { id: oppositePlayer.name, amount: tempAttackAmount });
-    api.pushLogs();
+    Vue.set(oppositePlayer, 'health', oppositePlayer.health - tempAttackAmount);
+    if (oppositePlayer.health === 0) {
+      api.announcePlayerDeath(oppositePlayerName);
+    }
   },
   [types.PLAYER_DECREASE_HEALTH](state: State, payload: { id: string; amount: number }) {
     Vue.set(state.players[payload.id], 'health', state.players[payload.id].health - payload.amount);
   },
   [types.PLAYER_INCREASE_HEALTH](state: State, payload: { id: string; amount: number }) {
     Vue.set(state.players[payload.id], 'health', state.players[payload.id].health + payload.amount);
+  },
+  [types.ANNOUNCE_PLAYER_DEATH](state: State, payload: { id: string }) {
+    api.addLog({
+      message: `<b>${payload.id}</b>已阵亡！`,
+      bgColor: 'error',
+    });
+    api.pushLogs();
+    api.addLog({
+      message: '游戏结束。',
+    });
+    api.pushLogs();
   },
 };
 

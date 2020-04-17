@@ -87,3 +87,7 @@ export const openDialog = (id: string) => {
 export const closeDialog = (id: string) => {
   store.commit(types.DIALOG_CLOSE, { id });
 };
+
+export const announcePlayerDeath = (id: string) => {
+  store.commit(types.ANNOUNCE_PLAYER_DEATH, { id });
+};

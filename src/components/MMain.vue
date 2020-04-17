@@ -15,6 +15,8 @@
     </v-content>
     <m-footer></m-footer>
     <m-donate-dialog></m-donate-dialog>
+    <m-fight-dialog></m-fight-dialog>
+    <m-skillbuff-introduce-dialog></m-skillbuff-introduce-dialog>
   </v-app>
 </template>
 <script lang="ts">
@@ -23,16 +25,20 @@ import Component from 'vue-class-component';
 import MNavBar from './MNavBar.vue';
 import MFooter from './MFooter.vue';
 import MDonateDialog from './dialogs/MDonateDialog.vue';
+import MFightDialog from './dialogs/MFightDialog.vue';
 import MPlayerSetCard from './cards/MPlayerSetCard.vue';
 import MPlayerInfoCard from './cards/MPlayerInfoCard.vue';
+import MSkillBuffIntroduceDialog from './dialogs/MSkillBuffIntroduceDialog.vue';
 
 @Component({
   components: {
     'm-nav-bar': MNavBar,
     'm-footer': MFooter,
     'm-donate-dialog': MDonateDialog,
+    'm-fight-dialog': MFightDialog,
     'm-player-set-card': MPlayerSetCard,
     'm-player-info-card': MPlayerInfoCard,
+    'm-skillbuff-introduce-dialog': MSkillBuffIntroduceDialog,
   },
 })
 export default class MMain extends Vue {}

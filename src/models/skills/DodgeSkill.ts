@@ -1,3 +1,4 @@
+import store from '@/store';
 import Skill from './Skill';
 import { DodgeNotAttackableBuff } from '../buffs';
 
@@ -11,7 +12,7 @@ export default class AngrySkill extends Skill {
   readonly quote = '要来比速度吗？';
 
   effect() {
-    const tempPlayer = this.store.state.fight.players[this.owner];
+    const tempPlayer = store.state.fight.players[this.owner];
     const random = Math.floor(Math.random() * 100);
     // const isDodge = tempPlayer.speed.value >= 100;
     if (random <= tempPlayer.speed.value) {
@@ -22,8 +23,8 @@ export default class AngrySkill extends Skill {
         affectNow: true,
       });
       this.api.addLog({
-        message: `${this.owner}成功闪避攻击！`,
-        bgColor: 'blue',
+        message: `<b>${this.owner}</b>成功闪避攻击！`,
+        bgColor: 'primary',
       });
     }
   }

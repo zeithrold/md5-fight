@@ -14,8 +14,8 @@ export default class ThunderSkill extends Skill {
     const isAffect = Math.floor(Math.random() * 100) <= 15;
     if (isAffect) {
       this.api.addLog({
-        message: `玩家${this.owner}的技能${this.displayName}发动！向被攻击者施加"雷电法术: 雷阵雨"效果`,
-        bgColor: 'blue',
+        message: `<b>${this.owner}</b>的技能<b>${this.displayName}</b>发动！向被攻击者施加"<b>雷电法术: 雷阵雨</b>"效果`,
+        bgColor: 'primary',
       });
       const tempOppositePlayerName = this.getOppositePlayerName(this.owner);
       this.api.addBuff({

@@ -30,7 +30,11 @@
       </v-list>
     </v-card-text>
     <v-card-actions>
-      <v-btn block large color="primary" disabled>生成玩家属性</v-btn>
+      <v-btn
+        block
+        large
+        color="primary"
+        @click="openDialog('fight')"><v-icon>mdi-run</v-icon>准备好战斗了吗？</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -38,10 +42,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-// import store from '@/store';
+import { openDialog } from '@/store/commmits';
 
 @Component({})
 export default class MPlayerSetCard extends Vue {
+  openDialog = openDialog;
+
   get props(): {
     [sectionKey: string]: {
       leftPlayer: number | string;

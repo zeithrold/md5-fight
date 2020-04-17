@@ -154,6 +154,6 @@ export default class Player {
 
   onBeingAttack() {
     this.defaultSkills.dodgeSkill.effect();
-    this.defaultSkills.fortunateSkill.effect();
+    if (this.props.attackable) this.defaultSkills.fortunateSkill.effect();
   }
 }

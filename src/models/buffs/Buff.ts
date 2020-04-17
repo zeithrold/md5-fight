@@ -20,15 +20,13 @@ export default class Buff implements GameAdditionalElement {
 
   readonly api = api;
 
-  readonly store = store;
-
   getOppositePlayerName(player: string): string {
-    let keys = Object.keys(this.store.state.fight.players);
+    const keys = Object.keys(store.state.fight.players);
     const index = keys.indexOf(player);
     if (index === -1) {
       throw ReferenceError("Cannot find the Player's name.");
     }
-    keys = keys.splice(index, 1);
+    keys.splice(index, 1);
     return keys[0];
   }
 

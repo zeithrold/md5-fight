@@ -12,7 +12,7 @@ const initState: State = {
 const mutations = {
   [types.DIALOG_REGISTER](state: State, payload: { id: string }) {
     Vue.set(state.dialogs, payload.id, false);
-    console.log(payload.id);
+    // console.log(payload.id);
   },
   [types.DIALOG_OPEN](state: State, payload: { id: string }) {
     if (Object.keys(state.dialogs).indexOf(payload.id) === -1) {

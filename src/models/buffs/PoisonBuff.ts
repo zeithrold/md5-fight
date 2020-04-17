@@ -1,3 +1,4 @@
+import store from '@/store';
 import Buff from './Buff';
 
 export default class PoisonBuff extends Buff {
@@ -13,11 +14,11 @@ export default class PoisonBuff extends Buff {
 
   effect() {
     this.api.addLog({
-      message: `受技能${this.displayName}影响，玩家${this.owner}从其生命值中扣除生命值最大值的10%。`,
+      message: `受技能<b>"${this.displayName}"</b>影响，<b>${this.owner}</b>从其生命值中扣除生命值最大值的10%。`,
     });
     this.api.decreasePlayerHealth({
       id: this.owner,
-      amount: this.store.state.fight.players[this.owner].maxHealth * 0.1,
+      amount: store.state.fight.players[this.owner].maxHealth * 0.1,
     });
   }
 }

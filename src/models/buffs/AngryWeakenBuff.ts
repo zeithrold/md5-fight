@@ -1,3 +1,4 @@
+import store from '@/store';
 import Buff from './Buff';
 
 
@@ -13,7 +14,7 @@ export default class AngryWeakenBuff extends Buff {
   readonly type = 'negative';
 
   created() {
-    const tempPlayer = this.store.state.fight.players[this.owner];
+    const tempPlayer = store.state.fight.players[this.owner];
     this.api.setPlayerMagicalDefence(
       {
         id: this.owner,

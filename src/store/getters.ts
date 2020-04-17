@@ -29,6 +29,16 @@ const playerDisplayProps: Getter<State, any> = (state: State) => {
     rightPlayer: rightPlayer.maxHealth,
     displayName: '最大生命值',
   };
+  result.physicalDefence = {
+    leftPlayer: leftPlayer.physicalDefence.default,
+    rightPlayer: rightPlayer.physicalDefence.default,
+    displayName: '物理防御',
+  };
+  result.magicalefence = {
+    leftPlayer: leftPlayer.magicalDefence.default,
+    rightPlayer: rightPlayer.magicalDefence.default,
+    displayName: '法术防御',
+  };
   result.attackPower = {
     leftPlayer: leftPlayer.attackPower.default,
     rightPlayer: rightPlayer.attackPower.default,
@@ -48,10 +58,10 @@ const playerDisplayProps: Getter<State, any> = (state: State) => {
   let tempLeftPlayerSkills = '';
   let tempRightPlayerSkills = '';
   for (let i = 0; i < leftPlayer.skills.length; i += 1) {
-    tempLeftPlayerSkills += `<v-chip>${leftPlayer.skills[i].displayName}</v-chip>`;
+    tempLeftPlayerSkills += `<v-chip color="primary">${leftPlayer.skills[i].displayName}</v-chip>`;
   }
   for (let i = 0; i < rightPlayer.skills.length; i += 1) {
-    tempRightPlayerSkills += `<v-chip>${rightPlayer.skills[i].displayName}</v-chip>`;
+    tempRightPlayerSkills += `<v-chip color="primary">${rightPlayer.skills[i].displayName}</v-chip>`;
   }
   result.skills = {
     leftPlayer: tempLeftPlayerSkills,
