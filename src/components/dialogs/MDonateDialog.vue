@@ -14,10 +14,10 @@
           </p>
         </v-col>
         <v-col cols="12" md="6" class="text-center">
-          <img src="/wechatpay.jpg" alt width="100%" />
+          <img src="https://zeithrold-public-1301570861.file.myqcloud.com/alipay.jpg" alt width="100%" />
         </v-col>
         <v-col cols="12" md="6" class="text-center">
-          <img src="/alipay.jpg" alt width="100%" />
+          <img src="https://zeithrold-public-1301570861.file.myqcloud.com/wechatpay_new.jpg" alt width="100%" />
         </v-col>
       </v-row>
     </v-container>
