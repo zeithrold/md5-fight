@@ -148,7 +148,7 @@ export default class Player {
     if (value <= 0) {
       tempValue = 0;
     } else if (value >= this.maxHealth) {
-      tempValue = this.maxHealth
+      tempValue = this.maxHealth;
     } else {
       tempValue = value;
       const delta = this.internalHealth - tempValue;
