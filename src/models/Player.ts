@@ -144,7 +144,8 @@ export default class Player {
    * The setter contains Player's anger-collector which is used by the anger.
    */
   set health(value: number) {
-    const tempValue = value <= 0 ? 0 : value;
+    let tempValue = value <= 0 ? 0 : value;
+    tempValue = value >= this.maxHealth ? this.maxHealth : value;
     if (tempValue < this.internalHealth) {
       const delta = this.internalHealth - tempValue;
       this.props.anger += delta * 0.25;

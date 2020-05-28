@@ -1,54 +1,36 @@
-export default `%c“You stripped your love down to the wire
-你把爱情剥离，归顺于天意
-Fire shining cold alone outside
-冷静的外表掩饰不了内心的焦灼
-You stripped it right down to the wire
-你将爱情置于不切实际的命运
-But I see you behind those tired eyes
-我却看穿了厌倦眼神后真正的你
-Now as you wade through shadows that live in your heart
-正如现在已然一扫内心的阴霾
-You'll find the light that leads on
-你会找到指引你的圣光
-Cause I see you for you and your beautiful stars
-因为我看见你的内在，如星光闪耀
-So take my hand, don't let go
-那就握紧我的手，永不分离
-Cause it's not too late, it's not too late
-因为现在还不晚，一切都来得及
-I see the hope in your heart
-我看见了你心中的希冀
-And sometimes you lose it, sometimes you're shooting
-捕获幸福的时候，即便常常失手
-Broken arrows in the dark
-让断箭隐匿于黑暗吧
+export default `%c“We don’t wanna believe it, that it’s all gone
+我不愿相信 那一切都已是过去
+Just a matter of minutes, before the sun goes down
+就像是夕阳西下前的几分钟
+We’re afraid to admit it, but I know you know, know that
+我们害怕去承认 但我知道你心知肚明
+We should’ve known better, we kept on trying
+我们本应该在尝试中了解更多
+It’s time that I see it, the fire’s dying out
+可我就这样目睹着爱情的火焰渐渐熄灭
+Can’t believe that I see this, we’re out of chances now
+真的不愿甘于现状 但我们确实没机会了
+And I just want you to know that
+不过我想你明白
 
-I've seen the darkness in the light
-我曾见识光明前的黑暗
-The kind of blue that leaves you lost and blind
-那种无助让你迷失和盲目
-The only thing that's black and white
-但唯一不可辩驳的是
-Is that you don't have to walk alone this time
-你无须独自承受这段时光
-We have to tear down walls that live in your heart
-我们得推翻你内心的城墙
-To find someone you call home
-找到你所谓的归属
-Now you see me for me and my beautiful scars
-你如今看清了我的过往，也伤痕累累
-So take my hand, don't let go
-那就握紧我的手，永不分离
-Cause it's not too late, it's not too late
-因为现在还不晚，一切都来得及
-I see the hope in your heart
-我看见了你心中的希冀
-And sometimes you lose it, sometimes you're shooting
-捕获幸福的时候，即便常常失手
-Broken arrows in the dark
-让断箭隐匿于黑暗吧”
+You and me it was good but it wasn’t right
+缘属天定 份乃人为
+And it’ll be hard but I know I will make it out
+这很困难 但我知道我会挺过去的
+Step by step, I’ll move on and get on with life
+我将循序渐进 继续我的生活
+So I let go, and I hope you’ll be happy now
+所以我选择放手 希望你能一切安好
+You and me it was good but it wasn’t right
+缘属天定 份乃人为
+And it’ll be hard but I know I will make it out
+这很困难 但我知道我会挺过去的
+Step by step I’ll move on and get on with life
+我将循序渐进 继续我的生活
+So I let go, and I hope you’ll be happy now
+所以我选择放手 希望你能一切安好”
 
-Broken Arrows - Avicii / Zac Brown Band
+Happy Now - Kygo / Sandro Cavazza
 
-Lyric Contributor: Between_Equinox_and_Solstice_@163Music
-Translate Contributor: 赫莉嘉hollica@163Music`;
+Lyric Contributor: Hondoes@163Music
+Translate Contributor: Mr_Raindroppp@163Music`;

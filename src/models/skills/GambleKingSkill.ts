@@ -14,7 +14,7 @@ export default class GambleKingSkill extends Skill {
 
 
   effect() {
-    const isAffects = Math.floor(Math.random() * 10) <= 4;
+    const isAffects = Math.floor(Math.random() * 10) % 10 <= 4;
     if (isAffects) {
       this.api.addLog({
         message: `<b>${this.owner}</b>的技能<b>${this.displayName}</b>发动！开始丢一枚硬币。`,

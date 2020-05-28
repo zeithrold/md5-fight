@@ -7,6 +7,7 @@ import GambleKingSkill from './GambleKingSkill';
 import LanguageInfluenceSkill from './LanguageInfluenceSkill';
 import ThunderSkill from './ThunderSkill';
 import WizardSkill from './WizardSkill';
+import HealingSkill from './HealingSkill';
 import * as utils from './utils';
 
 export {
@@ -19,5 +20,6 @@ export {
   LanguageInfluenceSkill,
   ThunderSkill,
   WizardSkill,
+  HealingSkill,
   utils,
 };

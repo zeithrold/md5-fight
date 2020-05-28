@@ -64,6 +64,12 @@ export default class MSkillBuffIntroduceDialog extends Vue {
       description: '被攻击者有15%的概率获得"雷电法术: 雷阵雨"效果。',
       quote: '准备好...感受雷电的力量了吗？',
     },
+    {
+      id: 'healing-skill',
+      name: '治疗术',
+      description: '攻击者在攻击阶段有50%的概率恢复自身生命值最大值的15%。',
+      quote: '生与死，仅在一瞬。',
+    },
   ];
 
   buffs: {
