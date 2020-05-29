@@ -31,6 +31,10 @@ export const setPlayerAttackPower = (payload: PlayerNumberPropPayload) => {
   store.commit(types.PLAYER_SET_ATTACKPOWER, payload);
 };
 
+export const setPlayerHealth = (payload: PlayerNumberPropPayload) => {
+  store.commit(types.PLAYER_SET_HEALTH, payload);
+};
+
 export const setPlayerAttackable = (payload: PlayerBooleanPropPayload) => {
   store.commit(types.PLAYER_SET_ATTACKABLE, payload);
 };

@@ -21,3 +21,4 @@ export const LOG_CLEAR = 'LOG_CLEAR';
 export const DIALOG_REGISTER = 'DIALOG_REGISTER';
 export const DIALOG_OPEN = 'DIALOG_OPEN';
 export const DIALOG_CLOSE = 'DIALOG_CLOSE';
+export const PLAYER_SET_HEALTH = 'PLAYER_SET_HEALTH';

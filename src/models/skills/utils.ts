@@ -1,5 +1,11 @@
 import {
-  GambleKingSkill, LanguageInfluenceSkill, ThunderSkill, WizardSkill, Skill, HealingSkill,
+  GambleKingSkill,
+  LanguageInfluenceSkill,
+  ThunderSkill,
+  WizardSkill,
+  Skill,
+  HealingSkill,
+  BloodMagicSkill,
 } from './index';
 
 const skillSet: (typeof Skill)[][] = [
@@ -8,6 +14,7 @@ const skillSet: (typeof Skill)[][] = [
   [ThunderSkill],
   [WizardSkill],
   [HealingSkill],
+  [BloodMagicSkill],
 ];
 
 export function getSkillSet(skillSetId: number) {

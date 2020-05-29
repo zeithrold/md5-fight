@@ -271,6 +271,9 @@ const mutations = {
       api.announcePlayerDeath(oppositePlayerName);
     }
   },
+  [types.PLAYER_SET_HEALTH](state: State, payload: {id: string; amount: number}) {
+    Vue.set(state.players[payload.id], 'health', payload.amount);
+  },
   [types.PLAYER_DECREASE_HEALTH](state: State, payload: { id: string; amount: number }) {
     Vue.set(state.players[payload.id], 'health', state.players[payload.id].health - payload.amount);
   },

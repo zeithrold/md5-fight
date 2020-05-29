@@ -43,7 +43,7 @@ export default class MSkillBuffIntroduceDialog extends Vue {
       id: 'wizard-skill',
       name: '巫师',
       quote: '可能只是给对手喂了芙蓉秘制小汉堡。',
-      description: '对手有15%的概率获得5回合的"毒药"效果。',
+      description: '对手有15%的概率获得5回合的"毒药"效果，若对手已有同效果，则仅刷新次数，不叠加。',
     },
     {
       id: 'gamble-king-skill',
@@ -69,6 +69,12 @@ export default class MSkillBuffIntroduceDialog extends Vue {
       name: '治疗术',
       description: '攻击者在攻击阶段有50%的概率恢复自身生命值最大值的15%。',
       quote: '生与死，仅在一瞬。',
+    },
+    {
+      id: 'blood-magic-skill',
+      name: '血液魔法学',
+      description: '[一次性技能] 攻击者在攻击阶段若生命值低于最大值的10%，则将两方的生命值皆设定为此前双方生命值的平均值。',
+      quote: '天与地、人与兽、你与我，都终为一体。',
     },
   ];
 
