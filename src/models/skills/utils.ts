@@ -6,6 +6,7 @@ import {
   Skill,
   HealingSkill,
   BloodMagicSkill,
+  RapidKnifeSkill,
 } from './index';
 
 const skillSet: (typeof Skill)[][] = [
@@ -15,6 +16,7 @@ const skillSet: (typeof Skill)[][] = [
   [WizardSkill],
   [HealingSkill],
   [BloodMagicSkill],
+  [RapidKnifeSkill],
 ];
 
 export function getSkillSet(skillSetId: number) {

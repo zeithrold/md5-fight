@@ -9,6 +9,7 @@ import ThunderSkill from './ThunderSkill';
 import WizardSkill from './WizardSkill';
 import HealingSkill from './HealingSkill';
 import BloodMagicSkill from './BloodMagicSkill';
+import RapidKnifeSkill from './RapidKnifeSkill';
 import * as utils from './utils';
 
 export {
@@ -23,5 +24,19 @@ export {
   WizardSkill,
   HealingSkill,
   BloodMagicSkill,
+  RapidKnifeSkill,
   utils,
 };
+
+export const skillList = [
+  AngrySkill,
+  FortunateSkill,
+  DodgeSkill,
+  GambleKingSkill,
+  LanguageInfluenceSkill,
+  ThunderSkill,
+  WizardSkill,
+  HealingSkill,
+  BloodMagicSkill,
+  RapidKnifeSkill,
+];

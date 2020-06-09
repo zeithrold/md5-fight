@@ -4,13 +4,13 @@ import Buff from './Buff';
 export default class AngryStrongenBuff extends Buff {
   readonly id: string = 'angry-strongen-buff';
 
-  readonly displayName: string = '愤怒: 加强攻击力';
+  static readonly displayName: string = '愤怒: 加强攻击力';
 
-  readonly description: string = '玩家的攻击力加强50%。';
+  static readonly description: string = '玩家的攻击力加强50%。';
 
-  readonly quote: string = '感受愤怒的力量吧。';
+  static readonly quote: string = '感受愤怒的力量吧。';
 
-  readonly type = 'positive';
+  static readonly type = 'positive';
 
 
   created() {

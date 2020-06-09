@@ -4,13 +4,13 @@ import Buff from './Buff';
 export default class LanguageInfluenceWeakenBuff extends Buff {
   readonly id: string = 'language-influence-weaken-buff';
 
-  readonly displayName: string = '语言感化: 虚弱';
+  static readonly displayName: string = '语言感化: 虚弱';
 
-  readonly description: string = '玩家本轮攻击力减弱50%。';
+  static readonly description: string = '玩家本轮攻击力减弱50%。';
 
-  readonly quote: string = '请友善待人。';
+  static readonly quote: string = '请友善待人。';
 
-  readonly type = 'negative';
+  static readonly type = 'negative';
 
   created() {
     const tempPlayer = store.state.fight.players[this.owner];

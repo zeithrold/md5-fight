@@ -9,6 +9,8 @@ import GambleKingDefenceLostEffectBuff from './GambleKingDefenceLostEffectBuff';
 import ThunderBuff from './ThunderBuff';
 import LanguageInfluenceFreezedBuff from './LanguageInfluenceFreezedBuff';
 import LanguageInfluenceWeakenBuff from './LanguageInfluenceWeakenBuff';
+import RapidKnifeAttackWeakenBuff from './RapidKnifeAttackWeakenBuff';
+import RapidKnifeUndodgeableBuff from './RapidKnifeUndodgeableBuff';
 
 export {
   Buff,
@@ -22,4 +24,20 @@ export {
   LanguageInfluenceFreezedBuff,
   LanguageInfluenceWeakenBuff,
   PoisonBuff,
+  RapidKnifeAttackWeakenBuff,
+  RapidKnifeUndodgeableBuff,
 };
+
+export const buffList = [
+  AngryStrongenBuff,
+  AngryWeakenBuff,
+  FortunateWeakenBuff,
+  DodgeNotAttackableBuff,
+  GambleKingDefenceLostEffectBuff,
+  ThunderBuff,
+  LanguageInfluenceFreezedBuff,
+  LanguageInfluenceWeakenBuff,
+  PoisonBuff,
+  RapidKnifeAttackWeakenBuff,
+  RapidKnifeUndodgeableBuff,
+];

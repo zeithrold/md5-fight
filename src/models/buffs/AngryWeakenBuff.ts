@@ -5,13 +5,13 @@ import Buff from './Buff';
 export default class AngryWeakenBuff extends Buff {
   readonly id: string = 'angry-weaken-buff';
 
-  readonly displayName: string = '愤怒: 减弱防御力';
+  static readonly displayName: string = '愤怒: 减弱防御力';
 
-  readonly description: string = '玩家的防御力减弱50%。';
+  static readonly description: string = '玩家的防御力减弱50%。';
 
-  readonly quote: string = '愤怒的力量不好惹。';
+  static readonly quote: string = '愤怒的力量不好惹。';
 
-  readonly type = 'negative';
+  static readonly type = 'negative';
 
   created() {
     const tempPlayer = store.state.fight.players[this.owner];
