@@ -4,11 +4,11 @@ import Buff from './Buff';
 export default class FortunateWeakenBuff extends Buff {
   readonly id: string = 'fortunate-weaken-buff';
 
-  static readonly displayName: string = '幸运: 减弱攻击力';
+  readonly displayName: string = '幸运: 减弱攻击力';
 
-  static readonly description: string = '玩家的攻击力减弱（对手玩家幸运值 / 100）%。';
+  readonly description: string = '玩家的攻击力减弱（对手玩家幸运值 / 100）%。';
 
-  static readonly quote: string = '...但也不能一点也没有幸运。';
+  readonly quote: string = '...但也不能一点也没有幸运。';
 
   static readonly type = 'negative';
 

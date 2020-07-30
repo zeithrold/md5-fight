@@ -8,9 +8,9 @@ export default class Buff implements GameAdditionalElement {
   readonly id: string = 'default-buff';
 
   // displayName: string = "Default display name";
-  static readonly displayName: string = 'Default display name';
+  readonly displayName: string = 'Default display name';
 
-  static readonly description: string = 'Default description';
+  readonly description: string = 'Default description';
 
   readonly owner: string;
 

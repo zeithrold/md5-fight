@@ -4,17 +4,17 @@ import Skill from './Skill';
 export default class RapidKnifeSkill extends Skill {
   readonly id = 'rapid-knife-skill';
 
-  static readonly displayName = '快刀斩乱麻';
+  readonly displayName = '快刀斩乱麻';
 
-  static readonly description = '攻击者在攻击阶段有50%的概率对被攻击者进行不可闪避的，攻击力为60%的攻击。';
+  readonly description = '攻击者在攻击阶段有50%的概率对被攻击者进行不可闪避的，攻击力为60%的攻击。';
 
-  static readonly quote = '只是看得见模糊的刀的影子。';
+  readonly quote = '只是看得见模糊的刀的影子。';
 
   effect() {
     const isAffects = (Math.floor(Math.random() * 10) % 10) + 1 <= 5;
     if (isAffects) {
       this.api.addLog({
-        message: `<b>${this.owner}</b>的技能<b>${RapidKnifeSkill.displayName}</b>发动！攻击者在攻击阶段有50%的概率对被攻击者进行不可闪避的，攻击力为60%的攻击。`,
+        message: `<b>${this.owner}</b>的技能<b>${this.displayName}</b>发动！攻击者在攻击阶段有50%的概率对被攻击者进行不可闪避的，攻击力为60%的攻击。`,
         bgColor: 'primary',
       });
       this.api.addBuff({

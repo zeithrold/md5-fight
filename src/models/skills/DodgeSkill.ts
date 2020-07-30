@@ -5,11 +5,11 @@ import { DodgeNotAttackableBuff } from '../buffs';
 export default class AngrySkill extends Skill {
   readonly id = 'dodge-skill';
 
-  static readonly displayName = '闪避';
+  readonly displayName = '闪避';
 
-  static readonly description = '若0~100的随机数小于等于玩家的速度，玩家闪避攻击。';
+  readonly description = '若0~100的随机数小于等于玩家的速度，玩家闪避攻击。';
 
-  static readonly quote = '要来比速度吗？';
+  readonly quote = '要来比速度吗？';
 
   effect() {
     const tempPlayer = store.state.fight.players[this.owner];

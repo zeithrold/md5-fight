@@ -4,11 +4,11 @@ import { LanguageInfluenceFreezedBuff, LanguageInfluenceWeakenBuff } from '../bu
 export default class LanguageInfluenceSkill extends Skill {
   readonly id = 'language-influence-skill';
 
-  static readonly displayName = '语言感化';
+  readonly displayName = '语言感化';
 
-  static readonly description = '被攻击者有20%的概率下一轮无法攻击；被攻击者有30%的概率下一轮攻击力降低50%。';
+  readonly description = '被攻击者有20%的概率下一轮无法攻击；被攻击者有30%的概率下一轮攻击力降低50%。';
 
-  static readonly quote = '来自祖安人的亲切问候。';
+  readonly quote = '来自祖安人的亲切问候。';
 
 
   effect() {
@@ -21,7 +21,7 @@ export default class LanguageInfluenceSkill extends Skill {
         duration: 1,
       });
       this.api.addLog({
-        message: `<b>${this.owner}</b>的技能<b>${LanguageInfluenceSkill.displayName}</b>发动！被攻击者下一轮无法攻击。`,
+        message: `<b>${this.owner}</b>的技能<b>${this.displayName}</b>发动！被攻击者下一轮无法攻击。`,
         bgColor: 'primary',
       });
     } else if (random > 10 && random <= 30) {
@@ -33,7 +33,7 @@ export default class LanguageInfluenceSkill extends Skill {
         },
       );
       this.api.addLog({
-        message: `<b>${this.owner}</b>的技能<b>${LanguageInfluenceSkill.displayName}</b>发动！被攻击者下一轮攻击力降低50%。`,
+        message: `<b>${this.owner}</b>的技能<b>${this.displayName}</b>发动！被攻击者下一轮攻击力降低50%。`,
         bgColor: 'primary',
       });
     }

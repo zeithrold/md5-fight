@@ -23,11 +23,14 @@
 </template>
 
 <script lang="ts">
+/* eslint class-methods-use-this: "off" */
+
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { buffList } from '@/models/buffs';
-import { skillList } from '@/models/skills';
+import { buffList, Buff } from '@/models/buffs';
+import { skillList, Skill } from '@/models/skills';
 import MDialog from './MDialog.vue';
+import 'core-js';
 
 @Component({
   components: {
@@ -35,8 +38,23 @@ import MDialog from './MDialog.vue';
   },
 })
 export default class MSkillBuffIntroduceDialog extends Vue {
-  skills = skillList;
+  // skills = [];
 
-  buffs = buffList;
+  // buffs = buffList;
+  get skills() {
+    const result = new Array<Skill>();
+    skillList.forEach((EachSkill) => {
+      result.push(new EachSkill('test owner'));
+    });
+    return result;
+  }
+
+  get buffs() {
+    const result = new Array<Buff>();
+    buffList.forEach((EachBuff) => {
+      result.push(new EachBuff('test owner'));
+    });
+    return result;
+  }
 }
 </script>

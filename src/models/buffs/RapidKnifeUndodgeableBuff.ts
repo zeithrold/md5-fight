@@ -3,11 +3,11 @@ import Buff from './Buff';
 export default class RapidKnifeUndodgeableBuff extends Buff {
   readonly id: string = 'rapid-knife-undodgeable-buff';
 
-  static readonly displayName: string = '快刀斩乱麻: 眩晕';
+  readonly displayName: string = '快刀斩乱麻: 眩晕';
 
-  static readonly description: string = '玩家不可闪避。';
+  readonly description: string = '玩家不可闪避。';
 
-  static readonly quote: string = '无声无息的短短几秒间，战斗仍在持续。';
+  readonly quote: string = '无声无息的短短几秒间，战斗仍在持续。';
 
   static readonly type = 'positive';
 
